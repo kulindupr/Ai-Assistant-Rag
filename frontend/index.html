@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG AI Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .answer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>RAG AI Assistant</h1>
+    <div class="question-form">
+        <textarea id="question" rows="4" placeholder="Ask your question here..."></textarea>
+        <button onclick="askQuestion()">Ask Question</button>
+    </div>
+    <div id="answer" class="answer" style="display: none;"></div>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById('question').value;
+            const answerDiv = document.getElementById('answer');
+            
+            try {
+                const response = await fetch('http://localhost:8000/ask', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ question: question })
+                });
+                
+                const data = await response.json();
+                answerDiv.style.display = 'block';
+                answerDiv.textContent = data.answer;
+            } catch (error) {
+                answerDiv.style.display = 'block';
+                answerDiv.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
