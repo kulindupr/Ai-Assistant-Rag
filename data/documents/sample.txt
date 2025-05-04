@@ -1,9 +1,0 @@
-This is a sample document for testing the RAG AI Assistant.
-It contains some basic information that can be used to test the question-answering functionality.
-
-The RAG (Retrieval-Augmented Generation) system works by:
-1. Retrieving relevant documents based on the user's question
-2. Using the retrieved documents as context
-3. Generating an answer using the Gemini AI model
-
-This system can be used to answer questions about any documents that are added to the system. 
